@@ -1,7 +1,7 @@
 // =========================================
 // 1. CONFIGURATION
 // =========================================
-const API_BASE_URL = "https://your-backend-name.onrender.com"; // Update this after hosting
+const API_BASE_URL = "https://bca-final-year-project.onrender.com"; // Update this after hosting
 
 // =========================================
 // 2. UI, MENU & SWIPER LOGIC

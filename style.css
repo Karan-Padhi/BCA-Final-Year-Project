@@ -1,0 +1,974 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto Condensed", sans-serif;
+  scroll-behavior: smooth;
+  /* border: 0.1rem solid red; */
+}
+
+/* :root {
+  --lead: #212121;
+  --gold-finger: rgb(166, 3, 3);
+  --eye-ball: rgba(233, 82, 82, 0.664);
+  --hint-yellow: rgb(179, 54, 54);
+  --pure-white: #f1ededc7;
+} */
+
+:root {
+  --lead: #212121;
+  --gold-finger: rgb(166, 3, 3);
+  /* --gold-finger: #f2bd12; */
+  --eye-ball: #fffdf7;
+  --hint-yellow: #fcf1cc;
+  --pure-white: #fff;
+}
+
+body {
+  background: var(--eye-ball);
+}
+
+/* BASIC STYLING */
+
+a {
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: var(--lead);
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+li {
+  list-style: none;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.gap-2 {
+  gap: 2rem;
+}
+
+.gap-3 {
+  gap: 3rem;
+}
+
+.wrapper {
+  max-width: 1400px;
+  margin: auto;
+  padding: 1.5rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+  display: block;
+}
+
+.p-top {
+  padding-top: 10rem;
+}
+
+.p-top-half {
+  padding-top: 5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.bt-5 {
+  border-top: 5rem;
+}
+
+.mt-4 {
+  margin-top: 4rem;
+}
+
+.mt-half {
+  margin-top: 0.5rem;
+}
+
+.mt-one-half {
+  margin-top: 1.5rem;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.fa-solid {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* HEADER STYLING */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: var(--hint-yellow);
+}
+
+.navbar {
+  min-height: 10vh;
+}
+
+/* Styling for the new logo and text format */
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-family: Arial, sans-serif; /* Standard font for now, can be updated */
+}
+
+.logo-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--gold-finger); /* Dark gray for the main text */
+}
+
+.logo span.delivery {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: normal;
+  color: #7a3f1f; /* Specific brown color from the image */
+  margin-top: -3px; /* Pulls the smaller text closer */
+}
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  background: var(--gold-finger);
+  border-radius: 1rem;
+  font-size: 1.1rem;
+  color: var(--pure-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 2px 1px;
+  transition: 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: var(--lead);
+}
+
+.btn-added {
+  background-color: #28a745 !important; /* Green success color */
+  pointer-events: none;
+}
+
+.cart-icon {
+  font-size: 1.3rem;
+  position: relative;
+}
+
+.cart-icon .cart-value {
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  font-size: 0.85rem;
+  width: 20px;
+  aspect-ratio: 1;
+  border-radius: 100vw;
+  background: var(--gold-finger);
+  color: var(--eye-ball);
+  text-align: center;
+  line-height: 20px;
+}
+
+.hamburger {
+  display: none; /* Hides the icon on all screens by default */
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--lead);
+}
+
+/* Header Link Hover Effects */
+.navlist li a,
+.mobile-menu li a {
+  display: inline-block; /* Required for transform to work on anchor tags */
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+.navlist li a:hover,
+.mobile-menu li a:hover {
+  transform: scale(1.1); /* Subtle 10% zoom */
+  color: var(--gold-finger); /* Changes text to your theme's red color */
+}
+
+/* Optional: Add a small underline that grows on hover */
+.navlist li a::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--gold-finger);
+  transition: width 0.3s;
+}
+
+.navlist li a:hover::after {
+  width: 100%;
+}
+
+/* MOBILE MENU STYLING */
+
+.btn-mobile {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  background: var(--gold-finger);
+  border-radius: 1rem;
+  font-size: 1.1rem;
+  color: var(--pure-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 2px 1px;
+  transition: 0.3s ease-in-out;
+}
+
+.mobile-menu {
+  display: none;
+}
+/* SECTION STYLING */
+
+.hero-section {
+  min-height: calc(100vh - 14vh);
+}
+
+.content,
+.image-container,
+.service-card {
+  flex: 1;
+  flex-basis: 300px;
+}
+
+.hero-section .image-container img {
+  width: 405.2px;
+  height: 600px;
+  object-fit: contain;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 5.6vw;
+  color: var(--lead);
+}
+
+h1 span {
+  color: var(--gold-finger);
+}
+
+p {
+  font-size: 1.25rem;
+  color: gray;
+  line-height: 1.8rem;
+  font-weight: 400;
+}
+
+.para {
+  margin-block: 2rem;
+  max-width: 550px;
+}
+
+.social-icons {
+  background: var(--hint-yellow);
+  width: 2rem;
+  aspect-ratio: 1.2;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 3rm;
+  box-shadow: rgba(0, 0, 0, 0.1) 2px 1px;
+  transition: 0.3s ease-in-out;
+}
+
+.social-icons:hover {
+  background: var(--lead);
+  color: var(--pure-white);
+}
+
+/* SECTON 01 */
+
+h5 {
+  font-size: 1.2rem;
+  letter-spacing: 0.2rem;
+  color: var(--gold-finger);
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 3.7rem;
+  text-transform: capitalize;
+  color: var(--lead);
+}
+
+h3 {
+  font-size: 2rem;
+  text-transform: capitalize;
+  color: var(--lead);
+}
+
+.service-card {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.service-card .image-container img {
+  width: 405.2px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* SECTION 02 */
+
+.order-card {
+  flex: 1;
+  flex-basis: 300px;
+  background: var(--pure-white);
+  padding: 0 1rem 2rem 1rem;
+  border: 0.1rem solid var(--gold-finger);
+  border-radius: 2rem;
+  box-shadow:
+    rgba(0, 0, 0, 0.05) 8px 8px 8px,
+    rgba(0, 0, 0, 0.05) 8px 8px 8px inset;
+}
+
+.order-card img {
+  width: 15rem;
+  filter: drop-shadow(rgba(0, 0, 0, 0.233) 0 10px 10px);
+}
+
+h4 {
+  font-size: 1.8rem;
+  color: var(--lead);
+}
+
+.order-card .price {
+  font-size: 1.7rem;
+  color: var(--gold-finger);
+  padding: 1.3rem 0 2rem 0;
+}
+
+/* Product Card Hover Effects */
+
+/* 1. The Container: Add a transition for the shadow */
+.order-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* 2. The Image: Ensure it has a transition and hidden overflow */
+.card-image {
+  overflow: hidden; /* This keeps the zoom inside the card boundaries */
+  border-radius: 2rem 2rem 0 0;
+}
+
+.card-image img {
+  transition: transform 0.5s ease; /* Longer duration for a "cinematic" zoom */
+}
+
+/* 3. The Hover State: Lift the card and zoom the image */
+.order-card:hover {
+  transform: translateY(-10px); /* Lifts the card up slightly */
+  box-shadow: 0 15px 30px rgba(166, 3, 3, 0.2); /* Adds a themed red-glow shadow */
+}
+
+.order-card:hover .card-image img {
+  transform: scale(1.1); /* Zooms the pickle image in by 10% */
+}
+
+/* CART TAB STYLING */
+
+.cart-tab {
+  background: var(--hint-yellow);
+  position: fixed;
+  inset: 0 -500px 0 auto;
+  width: 25rem;
+  padding-block: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  box-shadow: rgba(0, 0, 0, 0.1) -10px -10px 20px;
+  transition: 0.3s ease-in-out;
+}
+
+.cart-tab-active {
+  inset: 0 0 0 auto;
+}
+
+.cart-list {
+  flex: 1;
+  width: 100%;
+  margin-top: 1.5rem;
+  overflow: auto;
+}
+
+.cart-list::-webkit-scrollbar {
+  width: 0;
+}
+
+.total-container {
+  width: 100%;
+  background: var(--gold-finger);
+  text-align: center;
+  margin-block: 1rem;
+  padding-block: 1rem;
+}
+
+.total-container h4 {
+  display: inline-block;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--pure-white);
+}
+
+.btn-container .btn {
+  background: var(--lead);
+  transition: 0.3s ease-in-out;
+}
+
+.btn-container .btn:hover {
+  background: var(--gold-finger);
+  color: var(--lead);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 1rem;
+  transition: all 0.5s ease-in-out;
+}
+
+.item.slide-out {
+  transform: translateX(50%);
+}
+
+.item .detail {
+  flex: 2;
+}
+
+.cart-list .item:nth-child(even) {
+  background: var(--eye-ball);
+}
+
+.item .item-image img {
+  width: 5rem;
+}
+
+.item h4 {
+  font-size: 1rem;
+  color: var(--lead);
+}
+
+.item .image-total {
+  font-weight: 400;
+  margin-top: 0.3rem;
+}
+
+.quantity-btn {
+  background: var(--lead);
+  color: var(--pure-white);
+  width: 1.7rem;
+  aspect-ratio: 1;
+  border-radius: 10vw;
+  text-align: center;
+  line-height: 1.7rem;
+}
+
+.quantity-value {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-inline: 0.6rem;
+}
+
+/* SECTION 03 */
+
+.review-container {
+  width: 650px;
+  max-width: 100%;
+  flex: 1;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.profile {
+  width: 4rem;
+  aspect-ratio: 1;
+  border-radius: 100vw;
+  overflow: hidden;
+}
+
+.profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fa-star {
+  color: var(--gold-finger);
+}
+
+.arrow {
+  width: 2.5rem;
+  aspect-ratio: 1;
+  border-radius: 100vw;
+  background: var(--gold-finger);
+  color: var(--eye-ball);
+  text-align: center;
+  line-height: 2.5rem;
+}
+
+/* SECTION 04 */
+
+.app-container {
+  background: var(--hint-yellow);
+  padding: 3rem 6rem;
+  border-radius: 3rem;
+}
+
+.app-container .content h2 {
+  font-size: 4.5rem;
+}
+
+.app-container .image-container img {
+  width: 25rem;
+}
+
+/* SECTION 05 */
+
+.input-container {
+  width: 43rem;
+  max-width: 100%;
+  background: var(--pure-white);
+  padding: 0.8rem;
+  box-shadow: rgba(0, 0, 0, 0.212) 0 5px 8px;
+  border-radius: 1rem;
+  margin: 4rem auto 0 auto;
+}
+
+input[type="email"] {
+  flex: 1;
+  height: 7vh;
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  padding-left: 1rem;
+}
+
+input[type="email"]:focus {
+  outline: none;
+}
+
+/* ABOUT US */
+#about {
+  background: var(--hint-yellow);
+  padding: 3rem 6rem;
+  border-radius: 3rem;
+}
+
+#about .image-container {
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- CONTACT SECTION STYLING --- */
+
+#contacts {
+  background-color: var(--hint-yellow);
+  padding-bottom: 4rem;
+}
+
+.contact-container {
+  display: flex;
+  gap: 2rem;
+  align-items: stretch; /* Forces both cards to match the 450px height */
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contact-card {
+  flex: 1;
+  min-width: 350px;
+  height: 450px; /* YOUR FIXED HEIGHT */
+  background: #fff;
+  padding: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column; /* Allows internal elements to stack */
+}
+
+/* Form Distribution */
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%; /* Spans the full 450px minus card padding */
+}
+
+#contact-form input {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  background: #fdfdfd;
+}
+
+#contact-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  background: #fdfdfd;
+  flex-grow: 1; /* Pushes the button to the bottom */
+  resize: none;
+  font-family: inherit;
+}
+
+.send-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* Map Side Distribution */
+.contact-info-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.info-details p {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  color: #444;
+}
+
+.info-details i {
+  color: var(--gold-finger);
+  width: 20px;
+  text-align: center;
+}
+
+.map-box {
+  flex-grow: 1; /* Fills the rest of the 450px container */
+  border-radius: 1.5rem;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+/* --- SUCCESS MODAL IMPROVEMENTS --- */
+/* This ensures the success content takes over the whole modal cleanly */
+.success-container {
+  padding: 2rem;
+  text-align: center;
+}
+
+.success-icon {
+  font-size: 5rem;
+  color: #28a745;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.delivery-box {
+  background: #fdf2f2;
+  border: 2px dashed var(--gold-finger);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin: 1.5rem 0;
+}
+
+.delivery-box h3 {
+  color: var(--gold-finger);
+  font-size: 2rem;
+  margin: 0.5rem 0;
+}
+
+/* Container for both side-by-side parts */
+.contact-wrapper {
+  display: flex;
+  gap: 2rem;
+  align-items: stretch;
+  flex-wrap: wrap; /* Allows it to stack on mobile */
+  margin-top: 2rem;
+}
+
+/* Common Card Style */
+.contact-card,
+.contact-info-card {
+  flex: 1;
+  min-width: 320px;
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Force Form Inputs to stack vertically */
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 3rem 6rem;
+  border-radius: 3rem;
+}
+
+#contact-form input,
+#contact-form textarea {
+  width: 100%;
+  padding: 1.2rem;
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  font-size: 1rem;
+  background: #fdfdfd;
+}
+
+/* Spacing for info list */
+.info-list p {
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.info-list i {
+  color: var(--gold-finger);
+}
+
+/* FOOTER STYLING */
+
+.footer-container {
+  margin-top: 10rem;
+  padding: 4rem;
+  background: var(--hint-yellow);
+}
+
+.footer-container .flex {
+  align-items: flex-start;
+}
+
+.footer-wrapper {
+  flex: 1;
+  flex-basis: 180px;
+}
+
+.footer-wrapper:nth-child(1) {
+  flex: 2;
+}
+
+.footer-wrapper .social-icons {
+  background: var(--pure-white);
+}
+
+.footer-wrapper .social-icons:hover {
+  background: var(--lead);
+  color: var(--pure-white);
+}
+
+.footer-link {
+  color: gray;
+  font-size: 1.1rem;
+  transition: 0.3s ease-in-out;
+}
+
+.footer-link:hover {
+  color: var(--lead);
+}
+
+.subs-options {
+  justify-content: center;
+  color: gray;
+  font-size: 0.9rem;
+}
+
+.subs-options input[type="checkbox"] {
+  accent-color: var(--gold-finger); /* Matches your red theme */
+  cursor: pointer;
+}
+
+.input-container:focus-within {
+  outline: 2px solid var(--gold-finger);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* USER AUTHENTICATION */
+
+/* Auth Modal Styling */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-content {
+  background: var(--pure-white);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--lead);
+}
+
+.input-group {
+  margin-block: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-group input {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.auth-submit-btn {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* User Profile State */
+.user-info-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#logout-link {
+  font-size: 0.9rem;
+  color: var(--hint-yellow);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 780px) {
+  /* HEADER STYLING */
+  .navlist {
+    display: none;
+  }
+
+  .desktop-icon {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .desktop-action .btn {
+    display: none;
+  }
+
+  .hamburger {
+    display: block !important;
+  }
+
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: absolute;
+    top: 20%;
+    left: -100%;
+    transform: translate(-50%);
+    width: 20rem;
+    padding: 2rem;
+    background: var(--pure-white);
+    border: 0.1rem solid var(--gold-finger);
+    border-radius: 2rem;
+    box-shadow:
+      rgba(0, 0, 0, 0.05) 8px 8px 8px,
+      rgba(0, 0, 0, 0.05) 8px 8px 8px inset;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .mobile-menu-active {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* SECTION STYLING */
+
+  /* HERO STYLING */
+  h1 {
+    font-size: 3.6rem;
+  }
+
+  .content {
+    padding-top: 3rem;
+  }
+
+  .gap-2 {
+    gap: 1.4rem;
+  }
+
+  .gap-4 {
+    gap: 4rem;
+  }
+
+  /* SECTION 01 */
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  /* SECTION 04*/
+
+  .app-container {
+    padding: 2.2rem;
+  }
+
+  .app-container .content h2 {
+    font-size: 3.5rem;
+  }
+}
+
+/* @media screen and (max-width: 1500px) {
+  .hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--lead);
+  }
+} */

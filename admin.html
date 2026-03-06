@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Foodie Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .admin-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2rem;
+        background: #fff;
+      }
+      .admin-table th,
+      .admin-table td {
+        padding: 1rem;
+        border: 1px solid #eee;
+        text-align: left;
+      }
+      .admin-table th {
+        background: var(--gold-finger);
+        color: #fff;
+      }
+      .stat-card {
+        background: var(--hint-yellow);
+        padding: 2rem;
+        border-radius: 1rem;
+        flex: 1;
+        text-align: center;
+      }
+      .resolved-row {
+        opacity: 0.6;
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="flex between">
+        <h2>Admin Dashboard - Pickle Delivery</h2>
+        <button onclick="logout()" class="btn" style="background: var(--lead)">
+          Logout
+        </button>
+      </div>
+
+      <div class="flex gap-2" style="margin-top: 2rem">
+        <div class="stat-card">
+          <h3 id="user-count">0</h3>
+          <p>Total Customers</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="msg-count">0</h3>
+          <p>New Messages</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 3rem">Registered Customers</h3>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Joined Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="user-table-body"></tbody>
+      </table>
+
+      <h3 style="margin-top: 4rem">Customer Messages</h3>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="message-table-body"></tbody>
+      </table>
+    </div>
+
+    <script>
+      // STEP 1: Update this URL after hosting your backend on Render
+      const API_BASE_URL = "https://your-backend-name.onrender.com";
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const user = localStorage.getItem("userName");
+        if (!user) {
+          alert("Access Denied: Please sign in first.");
+          window.location.href = "index.html";
+          return;
+        }
+        loadAdminData();
+      });
+
+      async function loadAdminData() {
+        try {
+          const userRes = await fetch(`${API_BASE_URL}/api/admin/users`);
+          const users = await userRes.json();
+          document.getElementById("user-count").textContent = users.length;
+          document.getElementById("user-table-body").innerHTML = users
+            .map(
+              (user) => `
+                    <tr>
+                        <td>${user.id}</td>
+                        <td>${user.full_name}</td>
+                        <td>${user.email}</td>
+                        <td>${new Date(user.created_at).toLocaleDateString()}</td>
+                        <td><button onclick="deleteUser(${user.id})" style="background:#dc3545; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Delete</button></td>
+                    </tr>`,
+            )
+            .join("");
+
+          const msgRes = await fetch(`${API_BASE_URL}/api/admin/messages`);
+          const messages = await msgRes.json();
+          document.getElementById("msg-count").textContent = messages.filter(
+            (m) => m.status === "unread",
+          ).length;
+          document.getElementById("message-table-body").innerHTML = messages
+            .map(
+              (msg) => `
+                    <tr class="${msg.status === "resolved" ? "resolved-row" : ""}">
+                        <td>${new Date(msg.created_at).toLocaleString()}</td>
+                        <td>${msg.name}</td>
+                        <td>${msg.message}</td>
+                        <td><strong style="color:${msg.status === "unread" ? "red" : "green"}">${msg.status.toUpperCase()}</strong></td>
+                        <td>${msg.status === "unread" ? `<button onclick="resolveMessage(${msg.id})" style="background:#28a745; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Mark Resolved</button>` : "✓ Done"}</td>
+                    </tr>`,
+            )
+            .join("");
+        } catch (err) {
+          console.error("Load Error:", err);
+        }
+      }
+
+      async function deleteUser(id) {
+        if (confirm("Delete this customer?")) {
+          const res = await fetch(`${API_BASE_URL}/api/admin/users/${id}`, {
+            method: "DELETE",
+          });
+          if (res.ok) loadAdminData();
+        }
+      }
+
+      async function resolveMessage(id) {
+        const res = await fetch(
+          `${API_BASE_URL}/api/admin/messages/${id}/resolve`,
+          { method: "PUT" },
+        );
+        if (res.ok) loadAdminData();
+      }
+
+      function logout() {
+        localStorage.removeItem("userName");
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>

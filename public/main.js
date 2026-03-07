@@ -2,7 +2,7 @@
 // 1. CONFIGURATION
 // =========================================
 
-const API_BASE_URL = "https://bca-final-year-project-drab.vercel.app";
+const API_BASE_URL = "https://bca-final-year-project-2.onrender.com";
 
 // =========================================
 // 2. UI, MENU & SWIPER LOGIC

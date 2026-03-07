@@ -3,20 +3,18 @@ const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
+const path = require("path");
 
-const app = express(); // 1. CREATE APP FIRST
+const app = express();
 app.use(express.json());
 
-// 2. CONFIGURE CORS
-app.use(
-  cors({
-    origin: "https://bca-final-year-project-drab.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  }),
-);
+// 1. SIMPLIFIED CORS (Allows your frontend to talk to the backend easily)
+app.use(cors());
 
-// 3. CONFIGURE DATABASE POOL
+// 2. SERVE STATIC FILES (This allows Render to show your HTML/CSS/JS)
+app.use(express.static(path.join(__curdir, "public")));
+
+// 3. DATABASE CONNECTION POOL
 const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -32,8 +30,9 @@ const db = mysql.createPool({
   queueLimit: 0,
 });
 
-// 4. PUBLIC ROUTES
+// 4. API ROUTES
 
+// Contact Form Route
 app.post("/api/contact", (req, res) => {
   const { name, email, message } = req.body;
   const sql =
@@ -44,6 +43,7 @@ app.post("/api/contact", (req, res) => {
   });
 });
 
+// User Signup Route
 app.post("/api/signup", async (req, res) => {
   const { full_name, email, password } = req.body;
   try {
@@ -63,6 +63,7 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
+// User Login Route
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
   const sql = "SELECT * FROM users WHERE email = ?";
@@ -72,13 +73,12 @@ app.post("/api/login", (req, res) => {
       return res.status(400).json({ error: "Not found" });
     const user = results[0];
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ error: "Invalid login" });
+    if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
     res.status(200).json({ message: "Welcome", full_name: user.full_name });
   });
 });
 
-// 5. ADMIN ROUTES
-
+// Admin: Get Users
 app.get("/api/admin/users", (req, res) => {
   db.query(
     "SELECT id, full_name, email, created_at FROM users",
@@ -89,6 +89,7 @@ app.get("/api/admin/users", (req, res) => {
   );
 });
 
+// Admin: Get Messages
 app.get("/api/admin/messages", (req, res) => {
   db.query(
     "SELECT * FROM contact_messages ORDER BY created_at DESC",
@@ -99,24 +100,8 @@ app.get("/api/admin/messages", (req, res) => {
   );
 });
 
-app.delete("/api/admin/users/:id", (req, res) => {
-  db.query("DELETE FROM users WHERE id = ?", [req.params.id], (err) => {
-    if (err) return res.status(500).json({ error: "Failed" });
-    res.status(200).json({ message: "Deleted" });
-  });
-});
-
-app.put("/api/admin/messages/:id/resolve", (req, res) => {
-  db.query(
-    "UPDATE contact_messages SET status = 'resolved' WHERE id = ?",
-    [req.params.id],
-    (err) => {
-      if (err) return res.status(500).json({ error: "Failed" });
-      res.status(200).json({ message: "Resolved" });
-    },
-  );
-});
-
-// 6. START LISTENER AT THE VERY BOTTOM
+// 5. START SERVER
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

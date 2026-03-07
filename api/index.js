@@ -1,3 +1,11 @@
+app.use(
+  cors({
+    origin: "https://bca-final-year-project-drab.vercel.app", // Use your specific Vercel URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  }),
+);
+
 require("dotenv").config();
 const express = require("express");
 const mysql = require("mysql2");

@@ -8,11 +8,11 @@ const path = require("path");
 const app = express();
 app.use(express.json());
 
-// 1. SIMPLIFIED CORS (Allows your frontend to talk to the backend easily)
+// 1. SIMPLIFIED CORS (Allows your frontend to talk to the backend)
 app.use(cors());
 
-// 2. SERVE STATIC FILES (This allows Render to show your HTML/CSS/JS)
-app.use(express.static(path.join(__curdir, "public")));
+// 2. SERVE STATIC FILES (Fixed the typo here from __curdir to __dirname)
+app.use(express.static(path.join(__dirname, "public")));
 
 // 3. DATABASE CONNECTION POOL
 const db = mysql.createPool({

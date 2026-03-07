@@ -2,49 +2,49 @@
   {
     "id": 1,
     "name": "Avakaya (Mango) Pickle",
-    "price": "$200",
+    "price": "₹200",
     "image": "images/avakaya.png"
   },
   {
     "id": 2,
     "name": "Allam (Ginger) Pickle",
-    "price": "$150",
+    "price": "₹150",
     "image": "images/allam.png"
   },
   {
     "id": 3,
     "name": "Spicy Chicken Pickle",
-    "price": "$350",
+    "price": "₹350",
     "image": "images/chicken.png"
   },
   {
     "id": 4,
     "name": "Gongura Pickle",
-    "price": "$180",
+    "price": "₹180",
     "image": "images/gongura.png"
   },
   {
     "id": 5,
     "name": "Vellulli (Garlic) Pickle",
-    "price": "$160",
+    "price": "₹160",
     "image": "images/vellulli.png"
   },
   {
     "id": 6,
     "name": "Maagai Pickle",
-    "price": "$190",
+    "price": "₹190",
     "image": "images/maagai.png"
   },
   {
     "id": 7,
     "name": "Nimmakaya Pickle",
-    "price": "$140",
+    "price": "₹140",
     "image": "images/nimmakaya.png"
   },
   {
     "id": 8,
     "name": "Usirikaya (Amla) Pickle",
-    "price": "$170",
+    "price": "₹170",
     "image": "images/usirikaya.png"
   }
 ]

@@ -100,7 +100,11 @@
           if (typeof fetchData === "function") {
             fetchData();
           } else {
-            console.error("The function fetchData was not found in this file.");
+            document.addEventListener("DOMContentLoaded", () => {
+              // DELETE the 'fetchData' check and replace it with your real functions:
+              loadUsers(); // Ensure these names match the functions in your file
+              loadMessages();
+            });
           }
         });
       }

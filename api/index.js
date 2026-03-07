@@ -8,26 +8,23 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// 1. MySQL Connection (Optimized for TiDB Cloud)
-const db = mysql.createConnection({
+// Replace 'mysql.createConnection' with 'mysql.createPool'
+const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  port: parseInt(process.env.DB_PORT) || 4000, // Explicitly parsed as integer
+  port: parseInt(process.env.DB_PORT) || 4000,
   ssl: {
-    minVersion: "TLSv1.2", // Required for TiDB Cloud security
+    minVersion: "TLSv1.2",
     rejectUnauthorized: true,
   },
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
-db.connect((err) => {
-  if (err) {
-    console.error("Cloud Database connection failed: " + err.stack);
-    return;
-  }
-  console.log("Connected to TiDB Cloud Database.");
-});
+// Remove the db.connect() block entirely as pools connect automatically
 
 // 2. PUBLIC ROUTES (Contact, Signup, Login)
 

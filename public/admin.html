@@ -84,6 +84,20 @@
     </div>
 
     <script>
+      // Simple Admin Protection
+      const adminPassword = prompt(
+        "Please enter the Admin Password to access the dashboard:",
+      );
+
+      if (adminPassword !== "admin123") {
+        // You can change 'admin123' to any password you want
+        alert("Incorrect password. Access denied.");
+        window.location.href = "index.html"; // Redirects unauthorized users to the home page
+      } else {
+        // If password is correct, the rest of your existing admin code runs
+        fetchData();
+      }
+
       // STEP 1: Update this URL after hosting your backend on Render
       const API_BASE_URL = "https://bca-final-year-project-2.onrender.com";
 

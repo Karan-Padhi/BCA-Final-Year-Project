@@ -1,11 +1,3 @@
-app.use(
-  cors({
-    origin: "https://bca-final-year-project-drab.vercel.app", // Use your specific Vercel URL
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  }),
-);
-
 require("dotenv").config();
 const express = require("express");
 const mysql = require("mysql2");
@@ -14,15 +6,23 @@ const bcrypt = require("bcryptjs");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
 
-// Replace 'mysql.createConnection' with 'mysql.createPool'
+// Updated CORS to specifically allow your Vercel domain
+app.use(
+  cors({
+    origin: "https://bca-final-year-project-drab.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  }),
+);
+
+// 1. MySQL Connection Pool (Essential for Serverless/Vercel)
 const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  port: 4000,
+  port: 4000, // Explicit port for TiDB Cloud
   ssl: {
     minVersion: "TLSv1.2",
     rejectUnauthorized: true,
@@ -31,8 +31,6 @@ const db = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
 });
-
-// Remove the db.connect() block entirely as pools connect automatically
 
 // 2. PUBLIC ROUTES (Contact, Signup, Login)
 
@@ -52,7 +50,9 @@ app.post("/api/signup", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const sql =
       "INSERT INTO users (full_name, email, password) VALUES (?, ?, ?)";
-    db.query(sql, [full_name, email, hashedPassword], (err, result) => {
+
+    // Corrected callback parameters (err, results)
+    db.query(sql, [full_name, email, hashedPassword], (err, results) => {
       if (err) {
         if (err.code === "ER_DUP_ENTRY")
           return res.status(400).json({ error: "Email already exists" });

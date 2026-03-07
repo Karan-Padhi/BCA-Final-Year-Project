@@ -84,18 +84,25 @@
     </div>
 
     <script>
-      // Simple Admin Protection
+      // 1. First, check the password
       const adminPassword = prompt(
         "Please enter the Admin Password to access the dashboard:",
       );
 
       if (adminPassword !== "admin123") {
-        // You can change 'admin123' to any password you want
         alert("Incorrect password. Access denied.");
-        window.location.href = "index.html"; // Redirects unauthorized users to the home page
+        window.location.href = "index.html";
       } else {
-        // If password is correct, the rest of your existing admin code runs
-        fetchData();
+        // 2. If correct, wait for the page to load, then fetch data
+        document.addEventListener("DOMContentLoaded", () => {
+          // Check your admin.html for the REAL names of your functions.
+          // Based on your error, it might be loadUsers() or something similar.
+          if (typeof fetchData === "function") {
+            fetchData();
+          } else {
+            console.error("The function fetchData was not found in this file.");
+          }
+        });
       }
 
       // STEP 1: Update this URL after hosting your backend on Render

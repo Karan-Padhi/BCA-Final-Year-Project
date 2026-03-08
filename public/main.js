@@ -56,12 +56,12 @@ const updateTotals = () => {
       item.querySelector(".quantity-value").textContent,
     );
     const price = parseFloat(
-      item.querySelector(".item-total").textContent.replace("$", ""),
+      item.querySelector(".item-total").textContent.replace("₹", ""),
     );
     totalPrice += price;
     totalQuantity += quantity;
   });
-  cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+  cartTotal.textContent = `₹${totalPrice.toFixed(2)}`;
   cartValue.textContent = totalQuantity;
 };
 
@@ -89,7 +89,7 @@ const addToCard = (product) => {
   }
   cartProduct.push(product);
   let quantity = 1;
-  let price = parseFloat(product.price.replace("$", ""));
+  let price = parseFloat(product.price.replace("₹", ""));
 
   const cartItem = document.createElement("div");
   cartItem.classList.add("item");
@@ -110,7 +110,7 @@ const addToCard = (product) => {
     quantity++;
     cartItem.querySelector(".quantity-value").textContent = quantity;
     cartItem.querySelector(".item-total").textContent =
-      `$${(price * quantity).toFixed(2)}`;
+      `₹${(price * quantity).toFixed(2)}`;
     updateTotals();
   });
 
@@ -120,7 +120,7 @@ const addToCard = (product) => {
       quantity--;
       cartItem.querySelector(".quantity-value").textContent = quantity;
       cartItem.querySelector(".item-total").textContent =
-        `$${(price * quantity).toFixed(2)}`;
+        `₹${(price * quantity).toFixed(2)}`;
       updateTotals();
     } else {
       cartItem.classList.add("slide-out");

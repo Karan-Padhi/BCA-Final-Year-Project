@@ -100,6 +100,26 @@ app.get("/api/admin/messages", (req, res) => {
   );
 });
 
+// Admin: Delete a User
+app.delete("/api/admin/users/:id", (req, res) => {
+  const userId = req.params.id;
+  const sql = "DELETE FROM users WHERE id = ?";
+  db.query(sql, [userId], (err, result) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ message: "User deleted successfully" });
+  });
+});
+
+// Admin: Mark Message as Resolved
+app.put("/api/admin/messages/:id/resolve", (req, res) => {
+  const msgId = req.params.id;
+  const sql = "UPDATE contact_messages SET status = 'resolved' WHERE id = ?";
+  db.query(sql, [msgId], (err, result) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ message: "Message marked as resolved" });
+  });
+});
+
 // 5. START SERVER
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
